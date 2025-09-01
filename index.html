@@ -207,7 +207,7 @@
                     <div class="error" id="err_phone"></div>
                 </div>
 
-                <div class="field span-2">
+                <!-- <div class="field span-2">
                     <label for="language">Language *</label>
                     <select id="language">
                         <option value="">Select…</option>
@@ -215,9 +215,9 @@
                         <option>Arabic</option>
                     </select>
                     <div class="error" id="err_language"></div>
-                </div>
+                </div> -->
 
-                <div class="field span-2">
+                <!-- <div class="field span-2">
                     <label for="interested_in">Interested In *</label>
                     <select id="interested_in">
                         <option value="">Select…</option>
@@ -226,7 +226,7 @@
                         <option>Tell about eco-friendly system</option>
                     </select>
                     <div class="error" id="err_interested_in"></div>
-                </div>
+                </div> -->
 
                 <div class="field span-2">
                     <label for="gender">Gender *</label>
@@ -267,7 +267,7 @@
         function sanitize(s) { return s != null ? String(s).trim() : ''; }
         function clearErrors() { document.querySelectorAll('.error').forEach(el => el.textContent = ''); }
         function setFieldError(path, msg) { const el = $('err_' + path); if (el) el.textContent = msg; }
-        const normalizeBase = (u) => u.replace(/\/+$/, ''); // strip trailing slashes
+        const normalizeBase = (u) => u.replace(/\/+$/, '');
 
         // -------- VALIDATION --------
         const schema = yup.object({
@@ -275,9 +275,9 @@
             name_last: yup.string().nullable(),
             email: yup.string().email('Invalid email').nullable(),
             phone: yup.string().required('Phone is required'),
-            language: yup.string().required('Language is required'),
+            // language: yup.string().required('Language is required'),
             gender: yup.string().required('Gender is required'),
-            interested_in: yup.string().required('Interested in is required'),
+            // interested_in: yup.string().required('Interested in is required'),
             time: yup.string().required('Availability is required'),
         });
 
@@ -324,8 +324,8 @@
                     email: sanitize($('email').value) || null,
                     phone: sanitize($('phone').value),
                     gender: $('gender').value,
-                    language: $('language').value,
-                    interested_in: $('interested_in').value,
+                    // language: $('language').value,
+                    // interested_in: $('interested_in').value,
                     time: toTimestamp($('time').value),
                 };
 
