@@ -57,7 +57,7 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px
+            gap: 8px
         }
 
         @media (max-width:720px) {
@@ -72,7 +72,7 @@
         }
 
         .span-2 {
-            grid-column: span 2
+            grid-column: span 1
         }
 
         label {
@@ -174,40 +174,40 @@
         <h1>Create Lead</h1>
         <p class="help">Posts to <code>POST /leads</code>. Availability is sent as <code>YYYY-MM-DD HH:MM:SS</code> (no
             timezone).</p>
-            <div class="field span-2">
-  <label for="server">Server URL *</label>
-  <input id="server" type="url" placeholder="https://xxx.trycloudflare.com" />
-  <div class="error" id="err_server"></div>
-</div>
+        <div class="field span-2">
+            <label for="server">Server URL *</label>
+            <input id="server" type="url" placeholder="https://xxx.trycloudflare.com" />
+            <div class="error" id="err_server"></div>
+        </div>
 
 
         <form id="leadForm" novalidate>
             <div class="grid">
-                <div class="field">
+                <div class="field span-2">
                     <label for="name_first">First Name *</label>
                     <input id="name_first" type="text" />
                     <div class="error" id="err_name_first"></div>
                 </div>
 
-                <div class="field">
+                <div class="field span-2">
                     <label for="name_last">Last Name (optional)</label>
                     <input id="name_last" type="text" />
                     <div class="error" id="err_name_last"></div>
                 </div>
 
-                <div class="field">
+                <div class="field span-2">
                     <label for="email">Email (optional)</label>
                     <input id="email" type="email" />
                     <div class="error" id="err_email"></div>
                 </div>
 
-                <div class="field">
+                <div class="field span-2">
                     <label for="phone">Phone *</label>
                     <input id="phone" type="tel" placeholder="+44..." />
                     <div class="error" id="err_phone"></div>
                 </div>
 
-                <div class="field">
+                <div class="field span-2">
                     <label for="language">Language *</label>
                     <select id="language">
                         <option value="">Select…</option>
@@ -217,7 +217,7 @@
                     <div class="error" id="err_language"></div>
                 </div>
 
-                <div class="field">
+                <div class="field span-2">
                     <label for="interested_in">Interested In *</label>
                     <select id="interested_in">
                         <option value="">Select…</option>
