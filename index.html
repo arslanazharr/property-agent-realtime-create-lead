@@ -1,213 +1,221 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Create Lead</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        :root {
-            --bg: #f7fafc;
-            --card: #fff;
-            --text: #111827;
-            --muted: #6b7280;
-            --border: #e5e7eb;
-            --accent: #2563eb;
-            --error: #dc2626;
-            --success: #16a34a;
-            --hint: #f1f5f9;
-        }
+      :root {
+        --bg: #f7fafc;
+        --card: #fff;
+        --text: #111827;
+        --muted: #6b7280;
+        --border: #e5e7eb;
+        --accent: #2563eb;
+        --error: #dc2626;
+        --success: #16a34a;
+        --hint: #f1f5f9;
+      }
 
-        * {
-            box-sizing: border-box
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            padding: 24px
-        }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
 
-        .container {
-            width: 100%;
-            max-width: 860px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 22px;
-            box-shadow: 0 6px 24px rgba(0, 0, 0, .06)
-        }
+      .container {
+        width: 100%;
+        max-width: 860px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 22px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+      }
 
-        h1 {
-            margin: 0 0 12px;
-            font-size: 22px
-        }
+      h1 {
+        margin: 0 0 12px;
+        font-size: 22px;
+      }
 
-        p.help {
-            margin: 0 0 18px;
-            color: var(--muted);
-            font-size: 13px
-        }
+      p.help {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
 
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      @media (max-width: 720px) {
         .grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 8px
+          grid-template-columns: 1fr;
         }
+      }
 
-        @media (max-width:720px) {
-            .grid {
-                grid-template-columns: 1fr
-            }
-        }
+      .field {
+        display: flex;
+        flex-direction: column;
+      }
 
-        .field {
-            display: flex;
-            flex-direction: column
-        }
+      .span-2 {
+        grid-column: span 1;
+      }
 
-        .span-2 {
-            grid-column: span 1
-        }
+      label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
 
-        label {
-            font-size: 12px;
-            color: var(--muted);
-            margin-bottom: 6px
-        }
+      input,
+      select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #fff;
+        color: var(--text);
+        font-size: 14px;
+        outline: none;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+      }
 
-        input,
-        select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: #fff;
-            color: var(--text);
-            font-size: 14px;
-            outline: none;
-            transition: border-color .15s, box-shadow .15s
-        }
+      input:focus,
+      select:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      }
 
-        input:focus,
-        select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, .15)
-        }
+      .error {
+        margin-top: 6px;
+        font-size: 12px;
+        color: var(--error);
+        min-height: 16px;
+      }
 
-        .error {
-            margin-top: 6px;
-            font-size: 12px;
-            color: var(--error);
-            min-height: 16px
-        }
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+      }
 
-        .actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 12px
-        }
+      button {
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-weight: 600;
+      }
 
-        button {
-            padding: 10px 14px;
-            border-radius: 10px;
-            border: 1px solid transparent;
-            cursor: pointer;
-            font-weight: 600
-        }
+      .primary {
+        background: var(--accent);
+        color: #fff;
+      }
 
-        .primary {
-            background: var(--accent);
-            color: #fff
-        }
+      .secondary {
+        background: var(--hint);
+        color: var(--text);
+        border-color: var(--border);
+      }
 
-        .secondary {
-            background: var(--hint);
-            color: var(--text);
-            border-color: var(--border)
-        }
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
 
-        button:disabled {
-            opacity: .6;
-            cursor: not-allowed
-        }
+      .status {
+        margin-top: 14px;
+        padding: 12px;
+        border: 1px dashed var(--border);
+        border-radius: 10px;
+        font-size: 13px;
+        white-space: pre-wrap;
+      }
 
-        .status {
-            margin-top: 14px;
-            padding: 12px;
-            border: 1px dashed var(--border);
-            border-radius: 10px;
-            font-size: 13px;
-            white-space: pre-wrap
-        }
+      .ok {
+        background: #ecfdf5;
+        color: #065f46;
+        border-color: rgba(22, 163, 74, 0.35);
+      }
 
-        .ok {
-            background: #ecfdf5;
-            color: #065f46;
-            border-color: rgba(22, 163, 74, .35)
-        }
+      .err {
+        background: #fef2f2;
+        color: #7f1d1d;
+        border-color: rgba(220, 38, 38, 0.35);
+      }
 
-        .err {
-            background: #fef2f2;
-            color: #7f1d1d;
-            border-color: rgba(220, 38, 38, .35)
-        }
-
-        .hint {
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 6px;
-            background: var(--hint);
-            padding: 8px;
-            border-radius: 8px
-        }
+      .hint {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 6px;
+        background: var(--hint);
+        padding: 8px;
+        border-radius: 8px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <h1>Create Lead</h1>
-        <p class="help">Posts to <code>POST /leads</code>. Availability is sent as <code>YYYY-MM-DD HH:MM:SS</code> (no
-            timezone).</p>
-        <div class="field span-2">
-            <label for="server">Server URL *</label>
-            <input id="server" type="url" placeholder="https://xxx.trycloudflare.com" />
-            <div class="error" id="err_server"></div>
-        </div>
+      <h1>Create Lead</h1>
+      <p class="help">
+        Posts to <code>POST /leads</code>. Availability is sent as
+        <code>YYYY-MM-DD HH:MM:SS</code> (no timezone).
+      </p>
+      <div class="field span-2">
+        <label for="server">Server URL *</label>
+        <input id="server" type="url" placeholder="https://xxx.trycloudflare.com" />
+        <div class="error" id="err_server"></div>
+      </div>
 
+      <form id="leadForm" novalidate>
+        <div class="grid">
+          <div class="field span-2">
+            <label for="name_first">First Name *</label>
+            <input id="name_first" type="text" />
+            <div class="error" id="err_name_first"></div>
+          </div>
 
-        <form id="leadForm" novalidate>
-            <div class="grid">
-                <div class="field span-2">
-                    <label for="name_first">First Name *</label>
-                    <input id="name_first" type="text" />
-                    <div class="error" id="err_name_first"></div>
-                </div>
+          <div class="field span-2">
+            <label for="name_last">Last Name (optional)</label>
+            <input id="name_last" type="text" />
+            <div class="error" id="err_name_last"></div>
+          </div>
 
-                <div class="field span-2">
-                    <label for="name_last">Last Name (optional)</label>
-                    <input id="name_last" type="text" />
-                    <div class="error" id="err_name_last"></div>
-                </div>
+          <div class="field span-2">
+            <label for="email">Email (optional)</label>
+            <input id="email" type="email" />
+            <div class="error" id="err_email"></div>
+          </div>
 
-                <div class="field span-2">
-                    <label for="email">Email (optional)</label>
-                    <input id="email" type="email" />
-                    <div class="error" id="err_email"></div>
-                </div>
+          <div class="field span-2">
+            <label for="phone">Phone *</label>
+            <input id="phone" type="tel" placeholder="+44..." />
+            <div class="error" id="err_phone"></div>
+          </div>
 
-                <div class="field span-2">
-                    <label for="phone">Phone *</label>
-                    <input id="phone" type="tel" placeholder="+44..." />
-                    <div class="error" id="err_phone"></div>
-                </div>
-
-                <!-- <div class="field span-2">
+          <!-- <div class="field span-2">
                     <label for="language">Language *</label>
                     <select id="language">
                         <option value="">Select…</option>
@@ -217,7 +225,7 @@
                     <div class="error" id="err_language"></div>
                 </div> -->
 
-                <!-- <div class="field span-2">
+          <!-- <div class="field span-2">
                     <label for="interested_in">Interested In *</label>
                     <select id="interested_in">
                         <option value="">Select…</option>
@@ -228,152 +236,177 @@
                     <div class="error" id="err_interested_in"></div>
                 </div> -->
 
-                <div class="field span-2">
-                    <label for="gender">Gender *</label>
-                    <select id="gender">
-                        <option value="">Select…</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                    <div class="error" id="err_gender"></div>
-                </div>
+          <div class="field span-2">
+            <label for="gender">Gender *</label>
+            <select id="gender">
+              <option value="">Select…</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+            <div class="error" id="err_gender"></div>
+          </div>
 
-                <div class="field span-2">
-                    <label for="time">Availability *</label>
-                    <input id="time" type="datetime-local" />
-                    <div class="hint">Saved as timestamp (no timezone).</div>
-                    <div class="error" id="err_time"></div>
-                </div>
+          <div class="field span-2">
+            <label for="time">Availability *</label>
+            <input id="time" type="datetime-local" />
+            <div class="hint">Saved as timestamp (no timezone).</div>
+            <div class="error" id="err_time"></div>
+          </div>
+        </div>
 
-            </div>
+        <div class="actions">
+          <button class="primary" type="submit" id="submitBtn">Create Lead</button>
+          <button class="secondary" type="button" id="resetBtn">Reset</button>
+        </div>
+      </form>
 
-            <div class="actions">
-                <button class="primary" type="submit" id="submitBtn">Create Lead</button>
-                <button class="secondary" type="button" id="resetBtn">Reset</button>
-            </div>
-        </form>
-
-        <div id="status" class="status" style="display:none;"></div>
+      <div id="status" class="status" style="display: none"></div>
     </div>
 
     <script type="module">
-        import * as yup from "https://cdn.jsdelivr.net/npm/yup@1.4.0/+esm";
+      import * as yup from 'https://cdn.jsdelivr.net/npm/yup@1.4.0/+esm';
 
-        // -------- HELPERS --------
-        const $ = (id) => document.getElementById(id);
-        function clearStatus() { const box = $('status'); box.style.display = 'none'; box.textContent = ''; box.className = 'status'; }
-        function showStatus(msg, ok) { const box = $('status'); box.style.display = 'block'; box.textContent = msg; box.className = 'status ' + (ok ? 'ok' : 'err'); }
-        function toTimestamp(localVal) { if (!localVal) return ''; const [d, t] = localVal.split('T'); return `${d} ${t.length === 5 ? t + ':00' : t}`; }
-        function sanitize(s) { return s != null ? String(s).trim() : ''; }
-        function clearErrors() { document.querySelectorAll('.error').forEach(el => el.textContent = ''); }
-        function setFieldError(path, msg) { const el = $('err_' + path); if (el) el.textContent = msg; }
-        const normalizeBase = (u) => u.replace(/\/+$/, '');
+      // -------- HELPERS --------
+      const $ = (id) => document.getElementById(id);
+      function clearStatus() {
+        const box = $('status');
+        box.style.display = 'none';
+        box.textContent = '';
+        box.className = 'status';
+      }
+      function showStatus(msg, ok) {
+        const box = $('status');
+        box.style.display = 'block';
+        box.textContent = msg;
+        box.className = 'status ' + (ok ? 'ok' : 'err');
+      }
+      function toTimestamp(localVal) {
+        if (!localVal) return '';
+        const [d, t] = localVal.split('T');
+        return `${d} ${t.length === 5 ? t + ':00' : t}`;
+      }
+      function sanitize(s) {
+        return s != null ? String(s).trim() : '';
+      }
+      function clearErrors() {
+        document.querySelectorAll('.error').forEach((el) => (el.textContent = ''));
+      }
+      function setFieldError(path, msg) {
+        const el = $('err_' + path);
+        if (el) el.textContent = msg;
+      }
+      const normalizeBase = (u) => u.replace(/\/+$/, '');
 
-        // -------- VALIDATION --------
-        const schema = yup.object({
-            name_first: yup.string().required('First name is required'),
-            name_last: yup.string().nullable(),
-            email: yup.string().email('Invalid email').nullable(),
-            phone: yup.string().required('Phone is required'),
-            // language: yup.string().required('Language is required'),
-            gender: yup.string().required('Gender is required'),
-            // interested_in: yup.string().required('Interested in is required'),
-            time: yup.string().required('Availability is required'),
+      // -------- VALIDATION --------
+      const schema = yup.object({
+        name_first: yup.string().required('First name is required'),
+        name_last: yup.string().nullable(),
+        email: yup.string().email('Invalid email').nullable(),
+        phone: yup.string().required('Phone is required'),
+        // language: yup.string().required('Language is required'),
+        gender: yup.string().required('Gender is required'),
+        // interested_in: yup.string().required('Interested in is required'),
+        time: yup.string().required('Availability is required'),
+      });
+
+      // Prefill server from ?server=... or localStorage
+      (function initServerField() {
+        const urlParam = new URLSearchParams(location.search).get('server');
+        const saved = localStorage.getItem('server_base');
+        const val = urlParam || saved || '';
+        if (val) $('server').value = val;
+      })();
+
+      document.addEventListener('DOMContentLoaded', () => {
+        $('leadForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          clearStatus();
+          clearErrors();
+
+          // read/validate server base
+          const serverRaw = sanitize($('server').value);
+          if (!serverRaw) {
+            setFieldError('server', 'Server URL is required');
+            showStatus('Please fix the highlighted fields.', false);
+            return;
+          }
+          let API_BASE;
+          try {
+            const u = new URL(serverRaw); // validates URL
+            if (!/^https?:$/.test(u.protocol)) throw new Error('Invalid protocol');
+            API_BASE = normalizeBase(u.toString());
+          } catch {
+            setFieldError('server', 'Provide a valid URL like https://xxx.trycloudflare.com');
+            showStatus('Please fix the highlighted fields.', false);
+            return;
+          }
+          localStorage.setItem('server_base', API_BASE);
+
+          const first = sanitize($('name_first').value);
+          const last = sanitize($('name_last').value);
+          const full = [first, last].filter(Boolean).join(' ');
+
+          const payload = {
+            name_first: first,
+            name_last: last || null,
+            name: full,
+            email: sanitize($('email').value) || null,
+            phone: sanitize($('phone').value),
+            gender: $('gender').value,
+            // language: $('language').value,
+            // interested_in: $('interested_in').value,
+            time: toTimestamp($('time').value),
+          };
+
+          try {
+            await schema.validate(payload, { abortEarly: false });
+          } catch (err) {
+            if (err && err.inner) {
+              const seen = new Set();
+              err.inner.forEach((e) => {
+                if (seen.has(e.path)) return;
+                setFieldError(e.path, e.message);
+                seen.add(e.path);
+              });
+            }
+            showStatus('Please fix the highlighted fields.', false);
+            return;
+          }
+
+          $('submitBtn').disabled = true;
+          $('submitBtn').textContent = 'Submitting…';
+          try {
+            const res = await fetch(`${API_BASE}/leads`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            const text = await res.text();
+            let data;
+            try {
+              data = JSON.parse(text);
+            } catch {
+              data = text;
+            }
+
+            if (!res.ok) {
+              showStatus(`Error ${res.status}: ${data?.error || data}`, false);
+            } else {
+              showStatus('Success:\n' + JSON.stringify(data, null, 2), true);
+            }
+          } catch (e2) {
+            showStatus('Network error: ' + e2.message, false);
+          } finally {
+            $('submitBtn').disabled = false;
+            $('submitBtn').textContent = 'Create Lead';
+          }
         });
 
-        // Prefill server from ?server=... or localStorage
-        (function initServerField() {
-            const urlParam = new URLSearchParams(location.search).get('server');
-            const saved = localStorage.getItem('server_base');
-            const val = urlParam || saved || '';
-            if (val) $('server').value = val;
-        })();
-
-        document.addEventListener('DOMContentLoaded', () => {
-            $('leadForm').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                clearStatus(); clearErrors();
-
-                // read/validate server base
-                const serverRaw = sanitize($('server').value);
-                if (!serverRaw) {
-                    setFieldError('server', 'Server URL is required');
-                    showStatus('Please fix the highlighted fields.', false);
-                    return;
-                }
-                let API_BASE;
-                try {
-                    const u = new URL(serverRaw); // validates URL
-                    if (!/^https?:$/.test(u.protocol)) throw new Error('Invalid protocol');
-                    API_BASE = normalizeBase(u.toString());
-                } catch {
-                    setFieldError('server', 'Provide a valid URL like https://xxx.trycloudflare.com');
-                    showStatus('Please fix the highlighted fields.', false);
-                    return;
-                }
-                localStorage.setItem('server_base', API_BASE);
-
-                const first = sanitize($('name_first').value);
-                const last = sanitize($('name_last').value);
-                const full = [first, last].filter(Boolean).join(' ');
-
-                const payload = {
-                    name_first: first,
-                    name_last: last || null,
-                    name: full,
-                    email: sanitize($('email').value) || null,
-                    phone: sanitize($('phone').value),
-                    gender: $('gender').value,
-                    // language: $('language').value,
-                    // interested_in: $('interested_in').value,
-                    time: toTimestamp($('time').value),
-                };
-
-                try {
-                    await schema.validate(payload, { abortEarly: false });
-                } catch (err) {
-                    if (err && err.inner) {
-                        const seen = new Set();
-                        err.inner.forEach(e => {
-                            if (seen.has(e.path)) return;
-                            setFieldError(e.path, e.message);
-                            seen.add(e.path);
-                        });
-                    }
-                    showStatus('Please fix the highlighted fields.', false);
-                    return;
-                }
-
-                $('submitBtn').disabled = true; $('submitBtn').textContent = 'Submitting…';
-                try {
-                    const res = await fetch(`${API_BASE}/leads`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload),
-                    });
-                    const text = await res.text();
-                    let data; try { data = JSON.parse(text); } catch { data = text; }
-
-                    if (!res.ok) {
-                        showStatus(`Error ${res.status}: ${data?.error || data}`, false);
-                    } else {
-                        showStatus('Success:\n' + JSON.stringify(data, null, 2), true);
-                    }
-                } catch (e2) {
-                    showStatus('Network error: ' + e2.message, false);
-                } finally {
-                    $('submitBtn').disabled = false; $('submitBtn').textContent = 'Create Lead';
-                }
-            });
-
-            $('resetBtn').addEventListener('click', () => {
-                clearErrors(); clearStatus();
-            });
+        $('resetBtn').addEventListener('click', () => {
+          clearErrors();
+          clearStatus();
         });
+      });
     </script>
-
-
-
-</body>
-
+  </body>
 </html>
